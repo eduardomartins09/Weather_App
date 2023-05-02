@@ -1,5 +1,6 @@
 import { Thermostat, Air, WaterDrop, Brightness7 } from "@mui/icons-material"
 import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography, styled } from "@mui/material"
+import { useGlobalContext } from "../../context/weatherContext"
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: "#202B3B", 
@@ -21,6 +22,15 @@ const StyledTypographyWhite = styled(Typography)({
 })
 
 const WeatherForecast = () => {
+  const { data, error } = useGlobalContext()
+
+  if(error) return <p>{error}</p>
+
+  // navigator.geolocation.getCurrentPosition(function(position) {
+  //   console.log("Latitude is :", position.coords.latitude);
+  //   console.log("Longitude is :", position.coords.longitude);
+  // });
+
   return (
     <Container maxWidth="x1">   
       <Box mt={2} sx={{ display: { xs: "block", md: "flex" } }}>
@@ -30,13 +40,13 @@ const WeatherForecast = () => {
               <CardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
             </CardContent> 
             <StyledTypographyWhite variant="h4">
-              Madrid
+              {data?.name}
             </StyledTypographyWhite>
             <StyledTypographyWhite variant="h3">
-              31°
+              {data?.main.temp}°
             </StyledTypographyWhite>  
             <StyledTypographyWhite variant="h6">
-              Description: moderate rain
+              Description: {data?.weather[0].description}
             </StyledTypographyWhite>         
           </Box>
           <Divider orientation="vertical" variant="middle" flexItem />
@@ -53,7 +63,7 @@ const WeatherForecast = () => {
                         Real Feel
                       </Typography>                   
                       <StyledTypographyWhite variant="h5">
-                        31°
+                        {data?.main.feels_like}°
                       </StyledTypographyWhite>                   
                   </Grid>
                 </Grid>
@@ -62,10 +72,10 @@ const WeatherForecast = () => {
                     <Brightness7 sx={{ fontSize: "1.8em" }} />
                     <Grid item ml={1}>
                         <Typography gutterBottom variant="subtitle1">
-                          UV Index
+                          Humidity
                         </Typography>                   
                         <StyledTypographyWhite gutterBottom variant="h5">
-                          3
+                          {data?.main.humidity}%
                         </StyledTypographyWhite>                   
                     </Grid>
                   </Grid>
@@ -79,7 +89,7 @@ const WeatherForecast = () => {
                         Wind
                       </Typography>                   
                       <StyledTypographyWhite gutterBottom variant="h5">
-                        0.2 km/h
+                        {data?.wind.speed} km/h
                       </StyledTypographyWhite>                   
                   </Grid>                 
                 </Grid>
@@ -88,10 +98,10 @@ const WeatherForecast = () => {
                     <WaterDrop sx={{ fontSize: "1.8em" }} />
                     <Grid item>
                         <Typography gutterBottom variant="subtitle1" ml={1}>
-                          Chance of rain
+                          Preassure
                         </Typography>                   
                         <StyledTypographyWhite gutterBottom variant="h5">
-                          0%
+                          {data?.main.pressure} hPa
                         </StyledTypographyWhite>                   
                     </Grid>
                   </Grid>

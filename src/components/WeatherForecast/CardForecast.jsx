@@ -1,4 +1,5 @@
 import { Card, CardMedia, Divider, Grid, Typography, styled } from "@mui/material"
+import { useGlobalContext } from "../../context/weatherContext"
   
 const StyledCardForecast = styled(Card)(({ theme }) => ({
     backgroundColor: "#202B3B", 
@@ -26,6 +27,10 @@ const StyledCardMedia = styled(CardMedia)({
 })
 
 const CardForecast = () => {
+  const { data } = useGlobalContext()
+
+  console.log(data)
+  
   return (
     <StyledCardForecast>
           <Typography variant="p">

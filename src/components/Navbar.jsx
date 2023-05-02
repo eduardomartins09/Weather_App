@@ -9,12 +9,13 @@ import { Notifications, Cloud, ModeNight } from "@mui/icons-material";
 import {
   AppBar,
   Box,
-  InputBase,
   Toolbar,
   Badge,   
   styled,
   Switch,
 } from "@mui/material";
+import { useRef,  } from "react";
+import { useGlobalContext } from "../context/weatherContext";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -34,15 +35,32 @@ const Icons = styled(Box)({
 });
 
 const Navbar = () => {
-    
+    const { setSearchPlace } = useGlobalContext()
+    const cityName = useRef('')
+
+    const handleClick = (e) => {
+        e.preventDefault()
+
+        let tempSearchTerm = cityName.current.value
+
+        if((tempSearchTerm.replace(/[^\w\s]/gi,"")).length === 0){
+            setSearchPlace("London")
+          } else {
+            setSearchPlace(cityName.current.value)
+        }
+    }
 
     return (
         <AppBar position="sticky" sx={{ backgroundColor: "#202B3B"  }}>
             <StyledToolbar>
                 <Cloud sx={{ display: { xs: "block", sm: "none" } }} />
                 <StyledBoxSearch>
-                    <InputBase placeholder="search..." />
+                    <input 
+                        placeholder="search..." 
+                        ref = {cityName}  
+                    />
                 </StyledBoxSearch>
+                <button type = "submit" onClick={handleClick}>Submit</button>
                 <Icons sx={{ display: { xs: "none", sm: "flex" } }}>
                     <Badge>
                         <Cloud />
