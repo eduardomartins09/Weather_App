@@ -1,15 +1,6 @@
 import { Thermostat, Air, WaterDrop, Brightness7 } from "@mui/icons-material"
 import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography, styled } from "@mui/material"
 
-const StyledCardMedia = styled(CardMedia)({
-  width: "100px",
-  margin: "0 auto"
-})
-
-const StyledTypographyWhite = styled(Typography)({
-  color: "#FFF"
-})
-
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: "#202B3B", 
   borderRadius: "16px", 
@@ -20,33 +11,21 @@ const StyledCard = styled(Card)(({ theme }) => ({
   display: "block",
 
   [theme.breakpoints.up("sm")]: {
-    width: "600px",
+    width: "520px",
     display: "flex",
   },
 }))
 
-const StyledCardForecast = styled(Card)(({ theme }) => ({
-  backgroundColor: "#202B3B", 
-  borderRadius: "16px", 
-  padding: "1.5rem",
-  color: "#5A626F",
-  marginBottom:"1rem",
-  width: "310px",
-
-  [theme.breakpoints.up("sm")]: {
-    width: "600px",
-    display: "block",
-  },
-}))
-
-// sx={{ display: { xs: "none", sm: "block" } }}
+const StyledTypographyWhite = styled(Typography)({
+  color: "#FFF"
+})
 
 const WeatherForecast = () => {
   return (
     <Container maxWidth="x1">   
-      <Box mt={2}>
+      <Box mt={2} sx={{ display: { xs: "block", md: "flex" } }}>
         <StyledCard>
-          <Box mr={2}>
+          <Box mr={3}>
             <CardContent>
               <CardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
             </CardContent> 
@@ -120,98 +99,7 @@ const WeatherForecast = () => {
               </Grid>  
             </Grid>
           </Box> 
-        </StyledCard> 
-        <StyledCardForecast>
-          <Typography variant="p">
-            Today&apos;s Forecast
-          </Typography>
-          <Grid container p={3} textAlign="center">
-            <Grid item>
-              <Typography variant="p">
-                6:00 AM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <Grid item>
-              <Typography variant="p">
-                9:00 AM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "none", sm: "block" } }} />
-            <Grid item>
-              <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "block", sm: "none" } }} />
-              <Typography variant="p">
-                9:00 AM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid> 
-            <Divider orientation="vertical" variant="middle" flexItem />                          
-            <Grid item>
-              <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "block", sm: "none" } }} />
-              <Typography variant="p">
-                9:00 AM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>                           
-          </Grid>
-          <Grid container p={3} textAlign="center">
-          <Grid item>
-              <Typography variant="p">
-                3:00 PM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <Grid item>
-              <Typography variant="p">
-                6:00 PM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "none", sm: "block" } }} />
-            <Grid item>
-              <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "block", sm: "none" } }} />
-              <Typography variant="p">
-                12:00 PM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid> 
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <Grid item>
-              <Divider orientation="vertical" variant="middle" flexItem sx={{ display: { xs: "block", sm: "none" } }} />
-              <Typography variant="p">
-                12:00 PM
-              </Typography>
-              <StyledCardMedia component="img" image="https://openweathermap.org/img/wn/10d@2x.png" alt="algo" />
-              <Typography variant="h5">
-                25°
-              </Typography>            
-            </Grid>           
-          </Grid>
-        </StyledCardForecast>
+        </StyledCard>        
       </Box>    
     </Container>
   )
