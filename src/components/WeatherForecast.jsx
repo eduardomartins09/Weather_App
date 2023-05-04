@@ -1,83 +1,9 @@
+import { useState } from "react"
+import { Box, Container, Grid, Typography } from "@mui/material"
+import { StyledBoxCitys, StyledBoxSearch, StyledBoxWeather, StyledButton, StyledCard, StyledInput, StyledTypographyWhite, StyledCardMedia } from "./WeatherForecastStyles"
 import { Thermostat, Air, Speed, Brightness7, LocationOn, Search } from "@mui/icons-material"
-import { Box, Button, Card, CardMedia, Container, Grid, InputBase, Typography, styled } from "@mui/material"
 import { cities, formatToLocaleTime, iconUrlFromCode } from "../services/weatherService"
 import CardForecast from "./CardForecast"
-import { useState } from "react"
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: "#202B3B", 
-  borderRadius: "16px", 
-  padding: "1rem",
-  color: "#5A626F",
-  marginBottom:"1rem",
-  width: "310px",
-  display: "block",
-
-  [theme.breakpoints.up("sm")]: {
-    width: "535px",
-    textAlign: "center",
-    margin: "0 auto"
-  },
-
-  [theme.breakpoints.up("md")]: {
-    width: "600px",
-  },
-}))
-
-const StyledTypographyWhite = styled(Typography)({
-  color: "#FFF",
-  textAlign: "center"
-})
-
-const StyledBoxCitys = styled(Box)({
-  justifyContent: "space-evenly",
-  marginBottom: "1rem"
-})
-
-const StyledBoxWeather = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "0.5rem",
-  gap: "0.5rem"
-});
-
-const StyledBoxSearch = styled(Box)({
-  padding: "0 1rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "center",
-  marginBottom: "0.5rem"
-});
-
-const StyledInput = styled(InputBase)(({ theme }) => ({
-  width: "45%",
-  padding: "0 1rem",
-  borderRadius: "5px",
-  color: "white",
-  backgroundColor: "#5A626F", 
-
-  [theme.breakpoints.up("sm")]: {
-    width: "70%",
-  },
-}))
-
-const StyledButton = styled(Button)({
-  color: "#FFF",
-  fontSize: "1.3em"
-});
-
-const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
-  width: "250px", 
-
-  [theme.breakpoints.up("sm")]: {
-    width: "270px", 
-  },
-
-  [theme.breakpoints.up("md")]: {
-    width: "320px", 
-  },
-}))
 
 const WeatherForecast = ({ weather: {
     icon,
@@ -140,7 +66,7 @@ const WeatherForecast = ({ weather: {
         <StyledCard>
           <StyledBoxCitys sx={{ display: { xs: "none", sm: "flex" } }}>
             {cities.map((city) => (
-              <StyledButton 
+              <StyledButton
                 key={city.id}
                 onClick={() => setQuery({ q: city.title })}
               >
@@ -149,7 +75,7 @@ const WeatherForecast = ({ weather: {
             ))}
           </StyledBoxCitys>
           <StyledBoxSearch>
-            <StyledInput 
+            <StyledInput
               placeholder="Search..."
               value={placeName} 
               onChange={(e) => setPlaceName(e.currentTarget.value)} 
@@ -174,7 +100,7 @@ const WeatherForecast = ({ weather: {
           </Box>
           <Grid container p={2} gap>
             <Grid item>
-              <StyledCardMedia 
+              <StyledCardMedia
                 component="img"                 
                 image={iconUrlFromCode(icon)} 
                 alt="icon-climate" 
