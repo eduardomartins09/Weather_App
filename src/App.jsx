@@ -1,26 +1,40 @@
-import './App.css'
+import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
+import WeatherForecast from './components/WeatherForecast'
+import getFormattedWeatherData from './services/weatherService'
 
-import WeatherForecast from './components/WeatherForecast/WeatherForecast'
-import Navbar from './components/Navbar'
-import CardForecast from './components/WeatherForecast/CardForecast'
-import { useGlobalContext } from './context/weatherContext'
+const App = () => {
+  const [query, setQuery] = useState({q: 'london'})
+  const [units, setUnits] = useState('metric')
+  const [weather, setWeather] = useState(null)
 
-function App() {
-  const { loading } = useGlobalContext()
+  const fetchWeather = async () => {
+    try {
+      await getFormattedWeatherData({ ...query, units }).then((data) => {
+        setWeather(data)
+    })
+    } catch (exception) {
+      console.log(exception.message)
+      setQuery({q: 'paris'})
+    }     
+  }
+
+  useEffect(() => {
+    fetchWeather()
+  }, [query, units])
 
   return (
     <>
-      <Navbar />
-      <Box sx={{ maxWidth: "fit-content", display: { xs: "block", lg: "flex" } }}>
-        {!loading 
-          ? (
-            <>
-              <WeatherForecast /> 
-              <Box mt={2} ml={3} sx={{ display: { xs: "block", md: "flex" } }}>
-                <CardForecast />              
-              </Box>
-            </>
+      <Box sx={{ maxWidth: "fit-content", margin: "0 auto"  }}>
+        {weather 
+          ? (        
+            <WeatherForecast 
+              weather={weather} 
+              forecast={weather.list} 
+              setQuery={setQuery} 
+              setUnits={setUnits} 
+              units={units}
+            />         
           ) 
           : ( <p>Loading...</p>) 
         }        
