@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import WeatherForecast from './components/WeatherForecast'
 import getFormattedWeatherData from './services/weatherService'
+import WeatherForecast from './components/WeatherForecast'
 
 const App = () => {
   const [query, setQuery] = useState({q: 'london'})
